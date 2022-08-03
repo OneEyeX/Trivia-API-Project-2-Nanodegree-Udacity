@@ -1,0 +1,70 @@
+.App-header {
+  background-color: #222;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  height: 75px;
+  padding: 20px;
+  padding-right: 40%;
+  padding-left: 5%;
+  cursor: pointer;
+}
+
+.App-header>h1:hover,
+.App-header>h2:hover {
+  animation: shacke .4s;
+  color: dodgerblue;
+
+}
+
+.App-header>h1 {
+  color: dodgerblue;
+
+}
+
+.App-intro {
+  font-size: large;
+}
+
+h2 {
+  text-align: center;
+}
+
+li {
+  text-align: center;
+  margin: 5px 0px;
+}
+
+ul {
+  list-style-type: none;
+  padding-inline-start: 0px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: auto;
+}
+
+@keyframes shacke {
+  0% {
+    transform: translateX(0px)
+  }
+
+  25% {
+    transform: translateX(-5px)
+  }
+
+  50% {
+    transform: translateX(0px)
+  }
+
+  75% {
+    transform: translateX(5px)
+  }
+
+  100% {
+    transform: translateX(0px)
+  }
+}
