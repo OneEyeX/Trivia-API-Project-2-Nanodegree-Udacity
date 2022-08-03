@@ -77,7 +77,7 @@ class TriviaTestCase(unittest.TestCase):
 # test delete questions
 # ---------------------------------------#
     def test_delete_question(self):
-        res = self.client().delete('/questions/19')
+        res = self.client().delete('/questions/9')
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data["success"], True)
@@ -150,18 +150,18 @@ class TriviaTestCase(unittest.TestCase):
         quiz = {
             'previous_questions': [13],
             'quiz_category': {
-                'type': 'Sport',
-                'id': '6'
+                'type': 'Geography',
+                'id': '3'
             }
         }
         res = self.client().post('/quizzes',
                                  json={'previous_questions': [],
                                        'quiz_category':
-                                       {'id': '6', 'type': 'Sport'}})
+                                       {'id': '3', 'type': 'Geography'}})
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
-        self.assertEqual(data['question']['category'], 6)
+        self.assertEqual(data['question']['category'], 3)
 
     def test_quiz_category_unprocessable(self):
         res = self.client().post('/quizzes',
