@@ -286,7 +286,7 @@ the output:
 
 `POST '/categories'`
 
-- Sends a post request in order to add a new category (CHALLENGE 3)
+- Sends a post request in order to add a new category (added for CHALLENGE 3)
 - Request Body:
 
 ```json
@@ -310,7 +310,7 @@ the output:
 
 `POST '/users'`
 
-- Sends a post request in order to add a new user (Player) (CHALLENGE 2)
+- Sends a post request in order to add a new user (Player) (added for CHALLENGE 2)
 - Request Body:
 
 ```json
@@ -410,12 +410,16 @@ to add a new question
 curl -X POST -H "Content-Type: application/json" -d '{"question":"what is my country?", "answer":"Tunisia", "category":"1", "difficulty":"2"}' http://127.0.0.1:5000/questions 
 ````
 
-to add a new user (CHALLENGE 2)
+to add a new user (added for CHALLENGE 2)
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{"username":"Player 7" , "score":0 }' http://127.0.0.1:5000/users
 ````
+to delete a specific user (with ID) (added for CHALLENGE 2)
+```bash
+curl -X DELETE http://127.0.0.1:5000/users/5 
+````
 
-to add a new category (CHALLENGE 3)
+to add a new category (added for CHALLENGE 3)
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{"type":"Movies"}' http://127.0.0.1:5000/categories 
 ````

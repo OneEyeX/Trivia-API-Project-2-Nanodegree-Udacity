@@ -26,15 +26,15 @@ def create_app(test_config=None):
     setup_db(app)
 
     """
-    @TODO: Set up CORS. Allow '*' for origins. Delete the sample route after completing the TODOs
-    """
+    Setting up CORS and allow '*' for origins.
     # https://flask-cors.readthedocs.io/en/latest/
-
+    """
     cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+
     """
-    @TODO: Use the after_request decorator to set Access-Control-Allow
+    Using the after_request decorator to set Access-Control-Allow
+    CORS Headers
     """
-    # CORS Headers
     @app.after_request
     def after_request(response):
         response.headers.add('Access-Control-Allow-Headers',
@@ -43,11 +43,6 @@ def create_app(test_config=None):
                              'GET,PUT,POST,DELETE,OPTIONS')
         return response
 
-    """
-    @TODO:
-    Create an endpoint to handle GET requests
-    for all available categories.
-    """
 
 # ----------------------------------------------------------------------------#
 # An endpoint to get all available categories .
@@ -107,7 +102,6 @@ def create_app(test_config=None):
 # ----------------------------------------------------------------------------#
 # An endpoint to delete existing question
 # ----------------------------------------------------------------------------#
-
 
     @app.route('/questions/<int:question_id>', methods=['DELETE'])
     def delete_question(question_id):
@@ -174,7 +168,6 @@ def create_app(test_config=None):
 # An endpoint to get questions based on a search term
 # ----------------------------------------------------------------------------#
 
-
     @ app.route('/questions/search', methods=['POST'])
     def search_questions():
         # Get user input
@@ -206,7 +199,6 @@ def create_app(test_config=None):
 # ----------------------------------------------------------------------------#
 # An endpoint to get questions based on category.
 # ----------------------------------------------------------------------------#
-
 
     @ app.route("/categories/<int:category_id>/questions")
     def questions_per_category(category_id):
@@ -240,7 +232,6 @@ def create_app(test_config=None):
 # and return a random questions within the given category,
 # if provided, and that is not one of the previous questions.
 # ----------------------------------------------------------------------------#
-
 
     @ app.route('/quizzes', methods=['POST'])
     def quiz_game():
@@ -329,8 +320,9 @@ def create_app(test_config=None):
 
 
 # ----------------------------------------------------------------------------#
-# CHALLENGE2 add user
+# add user (added for CHALLENGE 2)
 # ----------------------------------------------------------------------------#
+
 
     @ app.route('/users', methods=['POST'])
     def add_user():
@@ -358,8 +350,9 @@ def create_app(test_config=None):
 
 
 # ----------------------------------------------------------------------------#
-# An endpoint to delete existing user
+# An endpoint to delete existing user (added for CHALLENGE 2)
 # ----------------------------------------------------------------------------#
+
 
     @app.route('/users/<int:users_id>', methods=['DELETE'])
     def delete_user(user_id):
@@ -407,7 +400,6 @@ def create_app(test_config=None):
 # ----------------------------------------------------------------------------#
 # Error handlers
 # ----------------------------------------------------------------------------#
-
 
     @ app.errorhandler(400)
     def bad_request(error):
