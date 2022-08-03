@@ -108,18 +108,17 @@ def create_app(test_config=None):
 # An endpoint to delete existing question
 # ----------------------------------------------------------------------------#
 
+
     @app.route('/questions/<int:question_id>', methods=['DELETE'])
     def delete_question(question_id):
         question = Question.query.filter_by(id=question_id).one_or_none()
         if question is not None:
             try:
-                # if the question exists
-                if question is not None:
-                    # delete it and commit the deletion
-                    question.delete()
-                    # send back the new paginated questions list to update front end
-                    selection = Question.query.order_by(Question.id).all()
-                    # paginated_questions = questions_pagination(request, selection)
+                # delete it and commit the deletion
+                question.delete()
+                # send back the new paginated questions list to update front end
+                selection = Question.query.order_by(Question.id).all()
+                # paginated_questions = questions_pagination(request, selection)
 
                 return jsonify({
                     'success': True,
@@ -175,6 +174,7 @@ def create_app(test_config=None):
 # An endpoint to get questions based on a search term
 # ----------------------------------------------------------------------------#
 
+
     @ app.route('/questions/search', methods=['POST'])
     def search_questions():
         # Get user input
@@ -206,6 +206,7 @@ def create_app(test_config=None):
 # ----------------------------------------------------------------------------#
 # An endpoint to get questions based on category.
 # ----------------------------------------------------------------------------#
+
 
     @ app.route("/categories/<int:category_id>/questions")
     def questions_per_category(category_id):
@@ -239,6 +240,7 @@ def create_app(test_config=None):
 # and return a random questions within the given category,
 # if provided, and that is not one of the previous questions.
 # ----------------------------------------------------------------------------#
+
 
     @ app.route('/quizzes', methods=['POST'])
     def quiz_game():
@@ -330,7 +332,6 @@ def create_app(test_config=None):
 # CHALLENGE2 add user
 # ----------------------------------------------------------------------------#
 
-
     @ app.route('/users', methods=['POST'])
     def add_user():
         # get the body from request
@@ -355,9 +356,30 @@ def create_app(test_config=None):
                 abort(422)
         abort(422)
 
+
+# ----------------------------------------------------------------------------#
+# An endpoint to delete existing user
+# ----------------------------------------------------------------------------#
+
+    @app.route('/users/<int:users_id>', methods=['DELETE'])
+    def delete_user(user_id):
+        user = User.query.filter_by(id=user_id).one_or_none()
+        if user is not None:
+            try:
+                # delete it and commit the deletion
+                user.delete()
+                return jsonify({
+                    'success': True,
+                    'user_deleted_id': user_id,
+                    'total_users': len(User.query.all()),
+                })
+            except:
+                abort(422)
+        abort(404)
 # ----------------------------------------------------------------------------#
 # CHALLENGE 3: add category
 # ----------------------------------------------------------------------------#
+
     @ app.route('/categories', methods=['POST'])
     def add_category():
         # get the body from request
@@ -385,6 +407,7 @@ def create_app(test_config=None):
 # ----------------------------------------------------------------------------#
 # Error handlers
 # ----------------------------------------------------------------------------#
+
 
     @ app.errorhandler(400)
     def bad_request(error):
