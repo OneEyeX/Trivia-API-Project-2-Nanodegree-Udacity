@@ -410,6 +410,11 @@ to add a new question
 curl -X POST -H "Content-Type: application/json" -d '{"question":"what is my country?", "answer":"Tunisia", "category":"1", "difficulty":"2"}' http://127.0.0.1:5000/questions 
 ````
 
+to add a new user (CHALLENGE 2)
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{"username":"Player 7" , "score":0 }' http://127.0.0.1:5000/users
+````
+
 to add a new category (CHALLENGE 3)
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{"type":"Movies"}' http://127.0.0.1:5000/categories 
