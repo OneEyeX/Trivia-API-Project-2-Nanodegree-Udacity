@@ -241,25 +241,35 @@ def create_app(test_config=None):
 # ----------------------------------------------------------------------------#
 
     @ app.route('/quizzes', methods=['POST'])
-    def quiz():
-        # CHALLENGE 3
-        # query the database to get the last user id
-        # used for score calculation and player identification
-        user_query = User.query.order_by(User.id.desc()).first()
-        if user_query is not None:
-            # add +1 to the id value
-            id = int(user_query.id) + 1
-        else:
-            id = 1
+    def quiz_game():
 
-        username = 'Player ' + str(id)
-        # print(username)
+        # grab user inputs
         body = request.get_json()
         category = body.get('quiz_category')
         previous_questions = body.get('previous_questions')
         # added to pick the score
         correct_answer = body.get('num_correct')
         forceEnd = body.get('forceEnd')
+
+        # CHALLENGE 3
+        # query the database to get the last user id
+        # used for score calculation and player identification
+        user_query = User.query.order_by(User.id.desc()).first()
+
+        # explanation: let's suppose we have a user in the database with ID=1 and username='Player 1'
+        # the code below will fetch the database to get the last user id (which is 1 in our case) and
+        # increment it in order to generate the new username of player 2
+        # if there is no user in the database the id will be 1 else it will be the last user id incremented by 1
+        if user_query is not None:
+            # add +1 to the id value
+            id = int(user_query.id) + 1
+        else:
+            # if there is no user
+            id = 1
+        # generate user username
+        username = 'Player ' + str(id)
+        # print(username)
+
         try:
             # if user picked 'ALL' categories
             if category['type'] == 'click':
