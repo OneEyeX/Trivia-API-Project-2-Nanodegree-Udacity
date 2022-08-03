@@ -11,7 +11,7 @@ QUESTIONS_PER_PAGE = 10
 
 def questions_pagination(request, selection):
     """
-    to paginate questions
+    to paginate questions (10 questions per page)
     """
     page = request.args.get('page', 1, type=int)
     start = (page - 1) * QUESTIONS_PER_PAGE
@@ -55,22 +55,20 @@ def create_app(test_config=None):
 
     @app.route("/categories")
     def get_all_categories():
-        # get all categories
+        # query the database to get all categories
         categories_query = Category.query.all()
         if len(categories_query) != 0:
-            # categories dict for holding the retrieves categories
-            categories_dict = {}
-
+            categories = {}
             # adding all categories to the dict
             for category in categories_query:
-                categories_dict[category.id] = category.type
+                categories[category.id] = category.type
 
             return jsonify({
                 'success': True,
-                'categories': categories_dict
+                'categories': categories
             })
 
-        # else
+        # if there are categories
         abort(404)
 
 # ----------------------------------------------------------------------------#
@@ -84,12 +82,12 @@ def create_app(test_config=None):
             # get all questions
             selection = Question.query.order_by(Question.id).all()
 
-            # get current questions in a page (10q)
+            # get questions in a page (10 questions per page)
             paginated_questions = questions_pagination(request, selection)
 
-            # if the page number is not zero
+            # if there are questions
             if (len(paginated_questions) != 0):
-                # get all categories
+                # query the database to get all categories
                 categories_query = Category.query.all()
                 categories_dict = {}
                 for category in categories_query:
@@ -110,7 +108,6 @@ def create_app(test_config=None):
 # An endpoint to delete existing question
 # ----------------------------------------------------------------------------#
 
-
     @app.route('/questions/<int:question_id>', methods=['DELETE'])
     def delete_question(question_id):
         question = Question.query.filter_by(id=question_id).one_or_none()
@@ -120,7 +117,7 @@ def create_app(test_config=None):
                 if question is not None:
                     # delete it and commit the deletion
                     question.delete()
-                    # send back the new paginated questions list, to update front end
+                    # send back the new paginated questions list to update front end
                     selection = Question.query.order_by(Question.id).all()
                     # paginated_questions = questions_pagination(request, selection)
 
@@ -167,8 +164,8 @@ def create_app(test_config=None):
                 'success': True,
                 'new_question_id': question.id,
                 'new_question': question.question,
-                # 'questions': current_questions,
                 'total_questions': len(Question.query.all()),
+                # 'questions': current_questions,
             })
         except:
             abort(422)
@@ -184,13 +181,13 @@ def create_app(test_config=None):
         body = request.get_json()
         search_term = body.get('searchTerm', None)
 
-        # If a search term has been entered, apply filter for question string
-        # and check if there are results
         try:
+            # If there is a search term query the database for questions with matched term
             if search_term is not None:
                 selection = Question.query.filter(Question.question.ilike
                                                   (f'%{search_term}%')).all()
             else:
+                # if search term is empty grab all the questions from the database
                 selection = Question.query.order_by(Question.id).all()
 
             # paginate and return results
@@ -243,7 +240,6 @@ def create_app(test_config=None):
 # if provided, and that is not one of the previous questions.
 # ----------------------------------------------------------------------------#
 
-
     @ app.route('/quizzes', methods=['POST'])
     def quiz():
         # CHALLENGE 3
@@ -280,7 +276,7 @@ def create_app(test_config=None):
             new_question = available_questions[random.randrange(
                 0, len(available_questions))].format() if len(
                     available_questions) > 0 else None
-            # CHALLENGE add score to each user
+            # CHALLENGE2 add score to each user
             # score can be tracked using http://127.0.0.1:5000/users
             if new_question is None or forceEnd is True:
                 # create a user and add score and save it
@@ -295,7 +291,7 @@ def create_app(test_config=None):
             abort(422)
 
 # ----------------------------------------------------------------------------#
-# CHALLENGE1 get user
+# CHALLENGE 2 get user
 # score can be tracked using http://127.0.0.1:5000/users
 # ----------------------------------------------------------------------------#
     @ app.route('/users', methods=['GET'])
@@ -321,7 +317,7 @@ def create_app(test_config=None):
 
 
 # ----------------------------------------------------------------------------#
-# CHALLENGE1 add user
+# CHALLENGE2 add user
 # ----------------------------------------------------------------------------#
 
 

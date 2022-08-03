@@ -284,6 +284,55 @@ the output:
 
 ---
 
+`POST '/categories'`
+
+- Sends a post request in order to add a new category (CHALLENGE 3)
+- Request Body:
+
+```json
+{
+  "type": "Movies",
+}
+```
+
+- Returns:
+
+```json
+{
+  "message": "Category created successfully",
+  "new_category_id": 10,
+  "new_category_type": "Movies",
+  "success": true
+}
+```
+
+---
+
+`POST '/users'`
+
+- Sends a post request in order to add a new user (Player) (CHALLENGE 2)
+- Request Body:
+
+```json
+{
+  "username": "Player 2",
+  "score": 0
+}
+```
+
+- Returns:
+
+```json
+{
+  "message": "User created successfully",
+  "new_user_id": 3,
+  "success": true,
+  "username": "Player 7"
+}
+```
+
+---
+
 `POST '/questions/search'`
 
 - Sends a post request in order to search for a specific question by search term
@@ -338,10 +387,16 @@ to get a list of all categories
 curl http://127.0.0.1:5000/categories
 ````
 
-to get all questions
+to get all questions (paginated and default page is page 1)
 
 ```bash
 curl http://127.0.0.1:5000/questions
+````
+
+to get all questions of a specific page (page 3 for example)
+
+```bash
+curl http://127.0.0.1:5000/questions?page=3
 ````
 
 to delete a specific question (with ID)
@@ -353,6 +408,11 @@ curl -X DELETE http://127.0.0.1:5000/questions/7
 to add a new question
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{"question":"what is my country?", "answer":"Tunisia", "category":"1", "difficulty":"2"}' http://127.0.0.1:5000/questions 
+````
+
+to add a new category (CHALLENGE 3)
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{"type":"Movies"}' http://127.0.0.1:5000/categories 
 ````
 
 ## Authors
