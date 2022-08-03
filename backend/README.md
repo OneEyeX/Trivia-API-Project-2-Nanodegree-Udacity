@@ -105,7 +105,6 @@ The API will return 4 error types when requests fail:
         "4": "History",
         "5": "Entertainment",
         "6": "Sports",
-        "8": "Chedly"
     },
     "questions": [
         {
@@ -252,7 +251,7 @@ the output:
         "answer": "This is an answer",
         "difficulty": 5,
         "category": 4
-  }
+            }
 }
 ```
 
@@ -339,8 +338,6 @@ to get a list of all categories
 curl http://127.0.0.1:5000/categories
 ````
 
-# -X PATCH -H "Content-Type: application/json" -d '{"rating":"1"}'
-
 to get all questions
 
 ```bash
@@ -357,3 +354,6 @@ to add a new question
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{"question":"what is my country?", "answer":"Tunisia", "category":"1", "difficulty":"2"}' http://127.0.0.1:5000/questions 
 ````
+
+## Authors
+Yours truly, Chedly CHAHED
