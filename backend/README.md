@@ -411,7 +411,7 @@ example of output for term what
 }
 ```
 
-## CURL REQUEST 
+## CURL REQUESTS 
 > --------------- CURL QUERIES TO TEST ENDPOINTS -------------
 
 to get a list of all categories
