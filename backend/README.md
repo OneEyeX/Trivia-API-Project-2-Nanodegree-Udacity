@@ -1,39 +1,72 @@
-# TRIVIA APP 
-## Project DOCUMENTATION
+# Backend - Trivia API
 
-Udacity is invested in creating bonding experiences for its employees and students. A bunch of team members got the idea to hold trivia on a regular basis and created a webpage to manage the trivia app and play the game, but their API experience is limited and still needs to be built out.
+## Setting up the Backend
 
-All backend code follows [PEP8 style guidelines](https://www.python.org/dev/peps/pep-0008/). 
+### Install Dependencies
 
-## Getting Started
+1. **Python 3.7** - Follow instructions to install the latest version of python for your platform in the [python docs](https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python)
 
-### Pre-requisites and Local Development 
-Developers using this project should already have Python3, pip and node installed on their local machines.
+2. **Virtual Environment** - We recommend working within a virtual environment whenever using Python for projects. This keeps your dependencies for each project separate and organized. Instructions for setting up a virual environment for your platform can be found in the [python docs](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
 
-#### Backend
+3. **PIP Dependencies** - Once your virtual environment is setup and running, install the required dependencies by navigating to the `/backend` directory and running:
 
-From the backend folder run `pip install requirements.txt`. All required packages are included in the requirements file. 
-
-To run the application run the following commands: 
-```
-export FLASK_APP=flaskr
-export FLASK_ENV=development 
-flask run
+```bash
+pip install -r requirements.txt
 ```
 
-These commands put the application in development and directs our application to use the `__init__.py` file in our flaskr folder. Working in development mode shows an interactive debugger in the console and restarts the server whenever changes are made. If running locally on Windows, look for the commands in the [Flask documentation](http://flask.pocoo.org/docs/1.0/tutorial/factory/).
+#### Key Pip Dependencies
 
-The application is run on `http://127.0.0.1:5000/` by default and is a proxy in the frontend configuration. 
+- [Flask](http://flask.pocoo.org/) is a lightweight backend microservices framework. Flask is required to handle requests and responses.
 
-#### Frontend
+- [SQLAlchemy](https://www.sqlalchemy.org/) is the Python SQL toolkit and ORM we'll use to handle the lightweight SQL database. You'll primarily work in `app.py`and can reference `models.py`.
 
-From the frontend folder, run the following commands to start the client: 
+- [Flask-CORS](https://flask-cors.readthedocs.io/en/latest/#) is the extension we'll use to handle cross-origin requests from our frontend server.
+
+### Set up the Database
+
+With Postgres running, create a `trivia` database:
+
+```bash
+createbd trivia
 ```
-npm install // only once to install dependencies
-npm start 
+
+Populate the database using the `trivia.psql` file provided. From the `backend` folder in terminal run:
+
+```bash
+psql trivia < trivia.psql
 ```
 
-By default, the frontend will run on localhost:3000. 
+### Run the Server
+
+From within the `./src` directory first ensure you are working using your created virtual environment.
+
+To run the server, execute:
+
+```bash
+flask run --reload
+```
+
+The `--reload` flag will detect file changes and restart the server automatically.
+
+## To Do Tasks
+
+These are the files you'd want to edit in the backend:
+
+1. `backend/flaskr/__init__.py`
+2. `backend/test_flaskr.py`
+
+One note before you delve into your tasks: for each endpoint, you are expected to define the endpoint and response data. The frontend will be a plentiful resource because it is set up to expect certain endpoints and response data formats already. You should feel free to specify endpoints in your own way; if you do so, make sure to update the frontend or you will get some unexpected behavior.
+
+1. Use Flask-CORS to enable cross-domain requests and set response headers.
+2. Create an endpoint to handle `GET` requests for questions, including pagination (every 10 questions). This endpoint should return a list of questions, number of total questions, current category, categories.
+3. Create an endpoint to handle `GET` requests for all available categories.
+4. Create an endpoint to `DELETE` a question using a question `ID`.
+5. Create an endpoint to `POST` a new question, which will require the question and answer text, category, and difficulty score.
+6. Create a `POST` endpoint to get questions based on category.
+7. Create a `POST` endpoint to get questions based on a search term. It should return any questions for whom the search term is a substring of the question.
+8. Create a `POST` endpoint to get questions to play the quiz. This endpoint should take a category and previous question parameters and return a random questions within the given category, if provided, and that is not one of the previous questions.
+9. Create error handlers for all expected errors including 400, 404, 422, and 500.
+
 
 ### Tests
 In order to run tests navigate to the backend folder and run the following commands: 
@@ -423,6 +456,3 @@ to add a new category (added for CHALLENGE 3)
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{"type":"Movies"}' http://127.0.0.1:5000/categories 
 ````
-
-## Authors
-Yours truly, Chedly CHAHED
