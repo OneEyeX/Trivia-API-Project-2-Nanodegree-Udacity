@@ -25,4 +25,4 @@ shellescape==3.8.1
 six==1.12.0
 SQLAlchemy==1.4.39
 urllib3==1.26.11
-Werkzeug==2.2.1
+Werkzeug==3.0.3
